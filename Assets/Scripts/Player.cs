@@ -28,6 +28,12 @@ public class Player : MonoBehaviour
 
     private SpawnManager _spawnManager;
 
+    [SerializeField]
+    private bool _tripleShotActive = false;
+
+    [SerializeField]
+    private GameObject _tripleShot;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -90,8 +96,19 @@ public class Player : MonoBehaviour
               
         if (firingAction.IsPressed() && Time.time > _attackTimer)
         {           
-                _attackTimer = Time.time + _attackDelay;                
+            _attackTimer = Time.time + _attackDelay;
+            
+
+            if (_tripleShotActive)
+            {
+                Instantiate(_tripleShot, transform.position, Quaternion.identity);
+            }
+            else
+            {
                 Instantiate(_laser, transform.position, Quaternion.identity);
+            }
+            
+                
         }
 
     }
